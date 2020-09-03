@@ -8,7 +8,11 @@ import android.hardware.Sensor;
 import android.os.Handler;
 import android.util.Log;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 public class SensorLogger implements SensorEventListener {
 
@@ -149,184 +153,15 @@ public class SensorLogger implements SensorEventListener {
 
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
-        if(sensorEvent.sensor.getType() == sensorListMap.get("ACCELEROMETER"))
-        {
-            mySensorValues.acc_x = sensorEvent.values[0];
-            mySensorValues.acc_y = sensorEvent.values[1];
-            mySensorValues.acc_z = sensorEvent.values[2];
-        }
-
-        if(sensorEvent.sensor.getType() == sensorListMap.get("ACCELEROMETER_UNCALIBRATED"))
-        {
-            mySensorValues.accU_x = sensorEvent.values[0];
-            mySensorValues.accU_y = sensorEvent.values[1];
-            mySensorValues.accU_z = sensorEvent.values[2];
-            mySensorValues.accUB_x = sensorEvent.values[3];
-            mySensorValues.accUB_y = sensorEvent.values[4];
-            mySensorValues.accUB_z = sensorEvent.values[5];
-        }
-
-        if(sensorEvent.sensor.getType() == sensorListMap.get("GRAVITY"))
-        {
-            mySensorValues.grv_x = sensorEvent.values[0];
-            mySensorValues.grv_y = sensorEvent.values[1];
-            mySensorValues.grv_z = sensorEvent.values[2];
-        }
-
-        if(sensorEvent.sensor.getType() == sensorListMap.get("GYROSCOPE"))
-        {
-            mySensorValues.gyr_x = sensorEvent.values[0];
-            mySensorValues.gyr_y = sensorEvent.values[1];
-            mySensorValues.gyr_z = sensorEvent.values[2];
-        }
-
-        if(sensorEvent.sensor.getType() == sensorListMap.get("GYROSCOPE_UNCALIBRATED"))
-        {
-            mySensorValues.gyrU_x = sensorEvent.values[0];
-            mySensorValues.gyrU_y = sensorEvent.values[1];
-            mySensorValues.gyrU_z = sensorEvent.values[2];
-            mySensorValues.gyrUD_x = sensorEvent.values[3];
-            mySensorValues.gyrUD_y = sensorEvent.values[4];
-            mySensorValues.gyrUD_z = sensorEvent.values[5];
-        }
-
-        if(sensorEvent.sensor.getType() == sensorListMap.get("LINEAR_ACCELERATION"))
-        {
-            mySensorValues.accL_x = sensorEvent.values[0];
-            mySensorValues.accL_y = sensorEvent.values[1];
-            mySensorValues.accL_z = sensorEvent.values[2];
-        }
-
-        if(sensorEvent.sensor.getType() == sensorListMap.get("ROTATION_VECTOR"))
-        {
-            mySensorValues.vec_x = sensorEvent.values[0];
-            mySensorValues.vec_y = sensorEvent.values[1];
-            mySensorValues.vec_z = sensorEvent.values[2];
-            mySensorValues.vec_scl = sensorEvent.values[4];
-        }
-
-//        if(sensorEvent.sensor.getType() == sensorListMap.get("SIGNIFICANT_MOTION"))
-//        {}
-
-        if(sensorEvent.sensor.getType() == sensorListMap.get("STEP_COUNTER"))
-        {
-            mySensorValues.count_step = sensorEvent.values[0];
-        }
-
-//        if(sensorEvent.sensor.getType() == sensorListMap.get("STEP_DETECTOR"))
-//        {}
-
-        if(sensorEvent.sensor.getType() == sensorListMap.get("GAME_ROTATION_VECTOR"))
-        {
-            mySensorValues.vecRGame_x = sensorEvent.values[0];
-            mySensorValues.vecRGame_y = sensorEvent.values[1];
-            mySensorValues.vecRGame_z = sensorEvent.values[2];
-        }
-
-        if(sensorEvent.sensor.getType() == sensorListMap.get("GEOMAGNETIC_ROTATION_VECTOR"))
-        {
-            mySensorValues.vecRGeo_x = sensorEvent.values[0];
-            mySensorValues.vecRGeo_y = sensorEvent.values[1];
-            mySensorValues.vecRGeo_z = sensorEvent.values[2];
-        }
-
-        if(sensorEvent.sensor.getType() == sensorListMap.get("MAGNETIC_FIELD"))
-        {
-            mySensorValues.mag_x = sensorEvent.values[0];
-            mySensorValues.mag_y = sensorEvent.values[1];
-            mySensorValues.mag_z = sensorEvent.values[2];
-        }
-
-        if(sensorEvent.sensor.getType() == sensorListMap.get("MAGNETIC_FIELD_UNCALIBRATED"))
-        {
-            mySensorValues.magU_x = sensorEvent.values[0];
-            mySensorValues.magU_y = sensorEvent.values[1];
-            mySensorValues.magU_z = sensorEvent.values[2];
-            mySensorValues.magUB_x = sensorEvent.values[3];
-            mySensorValues.magUB_y = sensorEvent.values[4];
-            mySensorValues.magUB_z = sensorEvent.values[5];
-        }
-
-        if(sensorEvent.sensor.getType() == sensorListMap.get("ORIENTATION"))
-        {
-            mySensorValues.ori_z = sensorEvent.values[0];
-            mySensorValues.ori_x = sensorEvent.values[1];
-            mySensorValues.ori_y = sensorEvent.values[2];
-        }
-
-        if(sensorEvent.sensor.getType() == sensorListMap.get("PROXIMITY"))
-        {
-            mySensorValues.prx = sensorEvent.values[0];
-        }
-
-        if(sensorEvent.sensor.getType() == sensorListMap.get("AMBIENT_TEMPERATURE"))
-        {
-            mySensorValues.amb_temp = sensorEvent.values[0];
-        }
-
-        if(sensorEvent.sensor.getType() == sensorListMap.get("LIGHT"))
-        {
-            mySensorValues.light = sensorEvent.values[0];
-        }
-
-        if(sensorEvent.sensor.getType() == sensorListMap.get("PRESSURE"))
-        {
-            mySensorValues.press = sensorEvent.values[0];
-        }
-
-        if(sensorEvent.sensor.getType() == sensorListMap.get("RELATIVE_HUMIDITY"))
-        {
-            mySensorValues.hum = sensorEvent.values[0];
-        }
-
-        if(sensorEvent.sensor.getType() == sensorListMap.get("TEMPERATURE"))
-        {
-            mySensorValues.temp = sensorEvent.values[0];
-        }
-
-        if(sensorEvent.sensor.getType() == sensorListMap.get("MOTION_DETECT"))
-        {
-            mySensorValues.motion_dtc = sensorEvent.values[0];
-        }
-
-        if(sensorEvent.sensor.getType() == sensorListMap.get("STATIONARY_DETECT"))
-        {
-            mySensorValues.station_dtc = sensorEvent.values[0];
-        }
-
-        if(sensorEvent.sensor.getType() == sensorListMap.get("LOW_LATENCY_OFFBODY_DETECT"))
-        {
-            mySensorValues.offbody_dtc = sensorEvent.values[0];
-        }
-
-        if(sensorEvent.sensor.getType() == sensorListMap.get("TYPE_POSE_6DOF"))
-        {
-            mySensorValues.pose_x = sensorEvent.values[0];
-            mySensorValues.pose_y = sensorEvent.values[1];
-            mySensorValues.pose_z = sensorEvent.values[2];
-            mySensorValues.pose_trsx = sensorEvent.values[3];
-            mySensorValues.pose_trsy = sensorEvent.values[4];
-            mySensorValues.pose_trsz = sensorEvent.values[5];
-            mySensorValues.pose_quaterx = sensorEvent.values[6];
-            mySensorValues.pose_quatery = sensorEvent.values[7];
-            mySensorValues.pose_quaterz = sensorEvent.values[8];
-            mySensorValues.pose_dlttrsx = sensorEvent.values[9];
-            mySensorValues.pose_dlttrsy = sensorEvent.values[10];
-            mySensorValues.pose_dlttrsz = sensorEvent.values[11];
-            mySensorValues.num_seq = sensorEvent.values[12];
-        }
-
-//        if(sensorEvent.sensor.getType() == sensorListMap.get("DEVICE_PRIVATE_BASE"))
-//        {}
-
-        if(sensorEvent.sensor.getType() == sensorListMap.get("HEART_BEAT"))
-        {
-            mySensorValues.heart_B = sensorEvent.values[0];
-        }
-
-        if(sensorEvent.sensor.getType() == sensorListMap.get("HEART_RATE"))
-        {
-            mySensorValues.heart_R = sensorEvent.values[0];
+        for(Map.Entry<String, Integer> entry : sensorListMap.entrySet()) {
+            if(sensorEvent.sensor.getType() == entry.getValue())
+            {
+                for (int i=0;i<mySensorValues.map.get(entry.getKey()).size();i++)
+                {
+                    mySensorValues.map.get(entry.getKey()).set(i, sensorEvent.values[i]);
+                }
+                break;
+            }
         }
 
     }
@@ -347,92 +182,161 @@ public class SensorLogger implements SensorEventListener {
 
 class SensorValues implements Cloneable {
     //"ACCELEROMETER"
-    float acc_x, acc_y, acc_z;
+    //float acc_x, acc_y, acc_z;
+    List<Float> accList = new ArrayList<Float>(Arrays.asList(0f,0f,0f));
 
     //"ACCELEROMETER_UNCALIBRATED"
-    float accU_x, accU_y, accU_z, accUB_x, accUB_y, accUB_z;
+    //float accU_x, accU_y, accU_z, accUB_x, accUB_y, accUB_z;
+    List<Float> accUList = new ArrayList<Float>(Arrays.asList(0f,0f,0f,0f,0f,0f));
 
     //"GRAVITY"
-    float grv_x, grv_y, grv_z;
+    //float grv_x, grv_y, grv_z;
+    List<Float> grvList = new ArrayList<Float>(Arrays.asList(0f,0f,0f));
 
     //"GYROSCOPE"
-    float gyr_x, gyr_y, gyr_z;
+    //float gyr_x, gyr_y, gyr_z;
+    List<Float> gyrList = new ArrayList<Float>(Arrays.asList(0f,0f,0f));
 
     //"GYROSCOPE_UNCALIBRATED"
-    float gyrU_x, gyrU_y, gyrU_z, gyrUD_x, gyrUD_y, gyrUD_z;
+    //float gyrU_x, gyrU_y, gyrU_z, gyrUD_x, gyrUD_y, gyrUD_z;
+    List<Float> gyrUList = new ArrayList<Float>(Arrays.asList(0f,0f,0f,0f,0f,0f));
 
     //"LINEAR_ACCELERATION"
-    float accL_x, accL_y, accL_z;
+    //float accL_x, accL_y, accL_z;
+    List<Float> accLList = new ArrayList<Float>(Arrays.asList(0f,0f,0f));
 
     //"ROTATION_VECTOR"
-    float vec_x, vec_y, vec_z, vec_scl;
+    //float vec_x, vec_y, vec_z, vec_scl;
+    List<Float> vecList = new ArrayList<Float>(Arrays.asList(0f,0f,0f,0f));
 
     //"SIGNIFICANT_MOTION"
     // No Values
+    List<Float> motList = new ArrayList<Float>(0);
 
     //"STEP_COUNTER"
-    float count_step;
+    //float count_step;
+    List<Float> cstepList = new ArrayList<Float>(Arrays.asList(0f));
 
     //"STEP_DETECTOR"
     // No Values
+    List<Float> dstepList = new ArrayList<Float>(0);
 
     //"GAME_ROTATION_VECTOR"
-    float vecRGame_x, vecRGame_y, vecRGame_z;
+    //float vecRGame_x, vecRGame_y, vecRGame_z;
+    List<Float> vecRGameList = new ArrayList<Float>(Arrays.asList(0f,0f,0f));
 
     //"GEOMAGNETIC_ROTATION_VECTOR"
-    float vecRGeo_x, vecRGeo_y, vecRGeo_z;
+    //float vecRGeo_x, vecRGeo_y, vecRGeo_z;
+    List<Float> vecRGeoList = new ArrayList<Float>(Arrays.asList(0f,0f,0f));
 
     //"MAGNETIC_FIELD"
-    float mag_x, mag_y, mag_z;
+    //float mag_x, mag_y, mag_z;
+    List<Float> magList = new ArrayList<Float>(Arrays.asList(0f,0f,0f));
 
     //"MAGNETIC_FIELD_UNCALIBRATED"
-    float magU_x, magU_y, magU_z, magUB_x, magUB_y, magUB_z;
+    //float magU_x, magU_y, magU_z, magUB_x, magUB_y, magUB_z;
+    List<Float> magUList = new ArrayList<Float>(Arrays.asList(0f,0f,0f,0f,0f,0f));
 
     //"ORIENTATION"
-    float ori_z, ori_x, ori_y;
+    //float ori_z, ori_x, ori_y;
+    List<Float> oriList = new ArrayList<Float>(Arrays.asList(0f,0f,0f));
 
     //"PROXIMITY"
-    float prx;
+    //float prx;
+    List<Float> prxList = new ArrayList<Float>(Arrays.asList(0f));
 
     //"AMBIENT_TEMPERATURE"
-    float amb_temp;
+    //float amb_temp;
+    List<Float> atempList = new ArrayList<Float>(Arrays.asList(0f));
 
     //"LIGHT"
-    float light;
+    //float light;
+    List<Float> lightList = new ArrayList<Float>(Arrays.asList(0f));
 
     //"PRESSURE"
-    float press;
+    //float press;
+    List<Float> pressList = new ArrayList<Float>(Arrays.asList(0f));
 
     //"RELATIVE_HUMIDITY"
-    float hum;
+    //float hum;
+    List<Float> humList = new ArrayList<Float>(Arrays.asList(0f));
 
     //"TEMPERATURE"
-    float temp;
+    //float temp;
+    List<Float> tempList = new ArrayList<Float>(Arrays.asList(0f));
 
     //"MOTION_DETECT"
-    float motion_dtc;
+    //float motion_dtc;
+    List<Float> dmotList = new ArrayList<Float>(Arrays.asList(0f));
 
     //"STATIONARY_DETECT"
-    float station_dtc;
+    //float station_dtc;
+    List<Float> dstaList = new ArrayList<Float>(Arrays.asList(0f));
 
     //"LOW_LATENCY_OFFBODY_DETECT"
-    float offbody_dtc;
+    //float offbody_dtc;
+    List<Float> doffList = new ArrayList<Float>(Arrays.asList(0f));
 
     //"TYPE_POSE_6DOF"
-    float pose_x, pose_y, pose_z;
-    float pose_trsx, pose_trsy, pose_trsz;
-    float pose_quaterx, pose_quatery, pose_quaterz;
-    float pose_dlttrsx, pose_dlttrsy, pose_dlttrsz;
-    float num_seq;
+    //float pose_x, pose_y, pose_z;
+    //float pose_trsx, pose_trsy, pose_trsz;
+    //float pose_quaterx, pose_quatery, pose_quaterz;
+    //float pose_dlttrsx, pose_dlttrsy, pose_dlttrsz;
+    //float num_seq;
+    List<Float> poseList = new ArrayList<Float>(Arrays.asList(0f,0f,0f,0f,0f,0f,0f,0f,0f,0f,0f,0f,0f));
 
     //"DEVICE_PRIVATE_BASE"
     // No Values
+    List<Float> baseList = new ArrayList<Float>(0);
 
     //"HEART_BEAT"
-    float heart_B;
+    //float heart_B;
+    List<Float> heartBList = new ArrayList<Float>(Arrays.asList(0f));
 
     //"HEART_RATE"
-    float heart_R;
+    //float heart_R;
+    List<Float> heartRList = new ArrayList<Float>(Arrays.asList(0f));
+
+    public LinkedHashMap<String, List<Float>> map = new LinkedHashMap<String, List<Float>>()
+    {
+        {
+            // Motion Sensors
+            put("ACCELEROMETER", accList);
+            put("ACCELEROMETER_UNCALIBRATED", accUList);
+            put("GRAVITY", grvList);
+            put("GYROSCOPE", gyrList);
+            put("GYROSCOPE_UNCALIBRATED", gyrUList);
+            put("LINEAR_ACCELERATION",accLList);
+            put("ROTATION_VECTOR",vecList);
+            put("SIGNIFICANT_MOTION",motList);
+            put("STEP_COUNTER",cstepList);
+            put("STEP_DETECTOR",dstepList);
+
+            // Position Sensors
+            put("GAME_ROTATION_VECTOR",vecRGameList);
+            put("GEOMAGNETIC_ROTATION_VECTOR",vecRGeoList);
+            put("MAGNETIC_FIELD",magList);
+            put("MAGNETIC_FIELD_UNCALIBRATED",magUList);
+            put("ORIENTATION",oriList);
+            put("PROXIMITY",prxList);
+
+            // Environment Sensors
+            put("AMBIENT_TEMPERATURE",atempList);
+            put("LIGHT",lightList);
+            put("PRESSURE",pressList);
+            put("RELATIVE_HUMIDITY",humList);
+            put("TEMPERATURE",tempList);
+
+            // Other Sensors
+            put("MOTION_DETECT",dmotList);
+            put("STATIONARY_DETECT",dstaList);
+            put("LOW_LATENCY_OFFBODY_DETECT",doffList);
+            put("TYPE_POSE_6DOF",poseList);
+            put("DEVICE_PRIVATE_BASE",baseList);
+            put("HEART_BEAT",heartBList);
+            put("HEART_RATE",heartRList);
+        }
+    };
 
     @Override
     public SensorValues clone() throws CloneNotSupportedException {
