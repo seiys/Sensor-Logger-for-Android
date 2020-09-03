@@ -69,15 +69,13 @@ public class SensorLogger implements SensorEventListener {
     private int[] mySensorSeries = new int[Max_Size];
     private int[] availableSensorList = new int[Max_Size];
     private Context myContext;
-    private boolean flagCsv;
     private SensorValues mySensorValues = new SensorValues();
     private Handler myHandler;
     private Runnable myRunnable;
 
-    public  SensorLogger(Context ctx, boolean flag)
+    public  SensorLogger(Context ctx)
     {
         myContext = ctx;
-        flagCsv = flag;
         listener = (SensorLoggerListener) ctx;
         mySensorManager = (SensorManager) myContext.getSystemService(Context.SENSOR_SERVICE);
         checkSensors();
@@ -152,7 +150,8 @@ public class SensorLogger implements SensorEventListener {
     }
 
     @Override
-    public void onSensorChanged(SensorEvent sensorEvent) {
+    public void onSensorChanged(SensorEvent sensorEvent)
+    {
         for(Map.Entry<String, Integer> entry : sensorListMap.entrySet()) {
             if(sensorEvent.sensor.getType() == entry.getValue())
             {
@@ -342,5 +341,69 @@ class SensorValues implements Cloneable {
     public SensorValues clone() throws CloneNotSupportedException {
         SensorValues clone = (SensorValues) super.clone();
         return clone;
+    }
+}
+
+class SensorValues2CSV {
+    public static String publishHeader(SensorValues mSensorValues, int[] mSensorSeries){
+        String header="";
+
+        header+="time";
+        int cKey = 0;
+        for(Map.Entry<String, List<Float>> entry : mSensorValues.map.entrySet())
+        {
+            if(mSensorSeries[cKey]==1)
+            {
+                header+=",";
+                if(entry.getValue().size()==0)
+                {
+                    header+=entry.getKey()+"_0";
+                }
+                else
+                {
+                    for (int i = 0; i < entry.getValue().size(); i++)
+                    {
+                        header+=entry.getKey()+"_"+i;
+                        if(i+1!=entry.getValue().size())
+                        {
+                            header+=",";
+                        }
+                    }
+                }
+            }
+            cKey++;
+        }
+        return header;
+    }
+
+    public static String publishValuesLine(SensorValues mSensorValues, int[] mSensorSeries){
+        String contents="";
+
+        contents+=System.currentTimeMillis();
+        int cKey = 0;
+        for(Map.Entry<String, List<Float>> entry : mSensorValues.map.entrySet())
+        {
+            if(mSensorSeries[cKey]==1)
+            {
+                contents+=",";
+                if(entry.getValue().size()==0)
+                {
+                    contents+="None";
+                }
+                else
+                {
+                    for (int i = 0; i < entry.getValue().size(); i++)
+                    {
+                        contents+=entry.getValue().get(i);
+                        if(i+1!=entry.getValue().size())
+                        {
+                            contents+=",";
+                        }
+                    }
+                }
+            }
+            cKey++;
+        }
+        return contents;
     }
 }
