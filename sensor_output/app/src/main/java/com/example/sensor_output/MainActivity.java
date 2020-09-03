@@ -11,16 +11,22 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity implements SensorLogger.SensorLoggerListener{
     SensorLogger myLogger;
     int[] sensorSeries;
-    SensorValues receivedValues;
+    SensorValues receivedValues = new SensorValues();
+    SensorValues2CSV sensorValues2CSV = new SensorValues2CSV();
+    CSVWriter myCSVWriter;
+    int ccsv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        myLogger = new SensorLogger(this, false);
-        sensorSeries = myLogger.getSensorList();
+        myLogger = new SensorLogger(this);
+        sensorSeries = new int[myLogger.Max_Size];
         System.arraycopy(myLogger.getSensorList(), 0, sensorSeries, 0, myLogger.Max_Size);
         myLogger.startLog(sensorSeries,20);
+        myCSVWriter = new CSVWriter(this);
+        myCSVWriter.init("test", sensorValues2CSV.publishHeader(receivedValues, sensorSeries));
+        ccsv=0;
     }
 
     public void textViewWriter(final TextView view, final String text){
@@ -75,5 +81,14 @@ public class MainActivity extends AppCompatActivity implements SensorLogger.Sens
         receivedValues = values;
         TextView textView = findViewById(R.id.text);
         textViewWriter(textView, make_outputText());
+        if(ccsv<10)
+        {
+            myCSVWriter.writeLine(sensorValues2CSV.publishValuesLine(receivedValues, sensorSeries));
+            ccsv++;
+            if(ccsv==10)
+            {
+                myCSVWriter.close();
+            }
+        }
     }
 }
