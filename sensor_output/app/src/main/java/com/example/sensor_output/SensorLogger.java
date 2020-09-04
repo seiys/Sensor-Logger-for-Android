@@ -72,6 +72,7 @@ public class SensorLogger implements SensorEventListener {
     private SensorValues mySensorValues = new SensorValues();
     private Handler myHandler;
     private Runnable myRunnable;
+    public boolean isLogging = false;
 
     public  SensorLogger(Context ctx)
     {
@@ -128,6 +129,7 @@ public class SensorLogger implements SensorEventListener {
                 Sensor sensor = mySensorManager.getDefaultSensor(val);
                 mySensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_FASTEST);
             }
+            cKey++;
         }
 
         myHandler = new Handler();
@@ -136,6 +138,7 @@ public class SensorLogger implements SensorEventListener {
             public void run() {
                 if(listener != null)
                 {
+                    isLogging = true;
                     try {
                         listener.onSensorValueReceived(mySensorValues.clone());
                     } catch (CloneNotSupportedException e) {
@@ -172,6 +175,7 @@ public class SensorLogger implements SensorEventListener {
 
     public void stopLog()
     {
+        isLogging = false;
         myHandler.removeCallbacks(myRunnable);
         myRunnable = null;
         myHandler = null;
