@@ -268,7 +268,7 @@ public class MainActivity extends AppCompatActivity implements SensorLogger.Sens
             {
                 String output = "";
                 for (int i = 0; i < entry.getValue().size(); i++) {
-                    output+=String.format("%.3f",receivedValues.map.get(entry.getKey()).get(i));;
+                    output+=String.format("%.3f",receivedValues.map.get(entry.getKey()).get(i));
                     if(i+1!=entry.getValue().size())
                     {
                         output+=", ";
